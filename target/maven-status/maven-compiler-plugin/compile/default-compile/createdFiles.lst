@@ -1,0 +1,5 @@
+com/smartcar/model/system/VehicleInfo.class
+com/smartcar/SmartCarApplication.class
+com/smartcar/ServletInitializer.class
+com/smartcar/util/JsonUtil.class
+com/smartcar/controller/Vehicles.class
