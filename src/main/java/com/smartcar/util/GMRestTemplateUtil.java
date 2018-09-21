@@ -167,7 +167,7 @@ public class GMRestTemplateUtil {
 	 * @param response
 	 * @throws HttpServerErrorException
 	 */
-	private static void validateResponse(ResponseModel response) throws ExternalApiException{
+	private static void validateResponse(@SuppressWarnings("rawtypes") ResponseModel response) throws ExternalApiException{
 		if(!response.getStatus().equals("200")) {
 			LOGGER.error("External server responded with error, error code is :"+response.getStatus()+ " service: "+response.getService());
 			throw new ExternalApiException("External server responded with error");
