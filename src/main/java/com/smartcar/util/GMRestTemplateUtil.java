@@ -135,7 +135,7 @@ public class GMRestTemplateUtil {
 	 * @param id
 	 * @return headerEntity
 	 */
-	public static HttpEntity<String> generateHeaderEntity(Map<String, String> params, MediaType mediaType) {
+	private static HttpEntity<String> generateHeaderEntity(Map<String, String> params, MediaType mediaType) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(mediaType);
 		return new HttpEntity<String>(generatePayload(params), headers);
@@ -213,8 +213,6 @@ public class GMRestTemplateUtil {
 		ResponseEntity<ResponseModel> response = restTemplate.exchange(uri, method, entity,
 				new ParameterizedTypeReference<ResponseModel>() {
 				});
-		if(response.getBody().getActionResult()!=null)
-		System.out.println(response.getBody().getActionResult().getStatus());
 		return response.getBody();
 	}
 
@@ -226,7 +224,7 @@ public class GMRestTemplateUtil {
 	 */
 	private static void validateResponse(@SuppressWarnings("rawtypes") ResponseModel response)
 			throws ExternalApiException {
-		if (!response.getStatus().equals("200")) {
+		if (!response.getStatus().startsWith("2")) {
 			LOGGER.error("External server responded with error, error code is :" + response.getStatus() + " service: "
 					+ response.getService());
 			throw new ExternalApiException("External server responded with error");

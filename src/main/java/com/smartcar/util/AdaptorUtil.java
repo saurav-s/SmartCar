@@ -3,6 +3,9 @@ package com.smartcar.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.smartcar.model.external.gm.DoorSecurityModel;
 import com.smartcar.model.external.gm.DoorSecurityModels;
 import com.smartcar.model.external.gm.EngineActionResponseModel;
@@ -17,8 +20,20 @@ import com.smartcar.model.system.EngineActionResponse;
 import com.smartcar.model.system.PercentInfo;
 import com.smartcar.model.system.VehicleInfo;
 import com.smartcar.model.system.enums.Action;
+import com.smartcar.model.system.enums.ActionResponse;
 
+/**
+ * 
+ * This class is used for adapting external system models to smart car response
+ * model.
+ * @author sanketsaurav 
+ */
 public class AdaptorUtil {
+
+	private static final int FOUR_DOOR = 4;
+	private static final int TWO_DOOR = 2;
+	private static final String NULL_VALUE = "Null";
+	private static final Logger LOGGER = LoggerFactory.getLogger(AdaptorUtil.class);
 
 	/**
 	 * 
@@ -34,9 +49,11 @@ public class AdaptorUtil {
 			info.setDriveTrain(response.getDriveTrain().getValue());
 			int doorCount = 0;
 			if (response.getFourDoorSedan().getValue().equalsIgnoreCase(Boolean.TRUE.toString())) {
-				doorCount = 4;
+				doorCount = FOUR_DOOR;
 			} else if (response.getTwoDoorCoupe().getValue().equalsIgnoreCase(Boolean.TRUE.toString())) {
-				doorCount = 2;
+				doorCount = TWO_DOOR;
+			} else {
+				LOGGER.warn("Unhandled scenario, setting door count to 0");
 			}
 			info.setDoorCount(doorCount);
 		}
@@ -71,8 +88,10 @@ public class AdaptorUtil {
 	public static PercentInfo adaptToBatteryPercentInfo(FuelBatteryModel response) {
 		PercentInfo info = new PercentInfo();
 		TypeValuePair batteryLevel = response.getBatteryLevel();
-		if (!batteryLevel.getType().equals("Null"))
+		if (!batteryLevel.getType().equals(NULL_VALUE))
 			info.setPercent(Double.valueOf(batteryLevel.getValue()).intValue());
+		else
+			LOGGER.warn("Unhandled scenario, setting battery percent to 0");
 		return info;
 	}
 
@@ -84,24 +103,26 @@ public class AdaptorUtil {
 	public static PercentInfo adaptToFuelPercentInfo(FuelBatteryModel response) {
 		PercentInfo info = new PercentInfo();
 		TypeValuePair tankLevel = response.getTankLevel();
-		if (!tankLevel.getType().equals("Null"))
+		if (!tankLevel.getType().equals(NULL_VALUE))
 			info.setPercent(Double.valueOf(tankLevel.getValue()).intValue());
+		else
+			LOGGER.warn("Unhandled scenario, setting fuel percent to 0");
 		return info;
 	}
-	
+
 	/**
 	 * 
 	 * @param action
 	 * @return
 	 */
 	public static EngineActionCommands adaptToGmCommand(Action action) {
-		if(Action.START.equals(action)) 
+		if (Action.START.equals(action)) {
 			return EngineActionCommands.START_VEHICLE;
-		else
+		} else {
 			return EngineActionCommands.STOP_VEHICLE;
+		}
 	}
 
-	
 	/**
 	 * 
 	 * @param response
@@ -109,10 +130,10 @@ public class AdaptorUtil {
 	 */
 	public static EngineActionResponse adaptToEngineActionInfo(EngineActionResponseModel response) {
 		EngineActionResponse result = new EngineActionResponse();
-		if(response.getStatus().equals(EngineActionStatus.EXECUTED.toString()))
-			result.setStatus("success");
+		if (response.getStatus().equals(EngineActionStatus.EXECUTED.toString()))
+			result.setStatus(ActionResponse.SUCCESS.getValue());
 		else
-			result.setStatus("error");
+			result.setStatus(ActionResponse.ERROR.getValue());
 		return result;
 	}
 

@@ -62,7 +62,7 @@ public class VehiclesController {
 	/**
 	 * 
 	 * @param vehicleId
-	 * @return Bttery info json string
+	 * @return Battery info json string
 	 */
 	@GetMapping("{id}/battery")
 	public String getBatteryInfo(@PathVariable("id") int vehicleId) {
@@ -72,9 +72,9 @@ public class VehiclesController {
 	/**
 	 * 
 	 * @param vehicleId
-	 * @return Bttery info json string
+	 * @return Engine Action response json string
 	 */
-	@PostMapping("{id}/engine")
+	@PostMapping(path="{id}/engine", consumes = "application/json")
 	public String perfromEngineAction(@PathVariable("id") int vehicleId, @RequestBody EngineAction action) {
 		return vehicleService.performEngineEaction(vehicleId, action.getAction());
 	}
