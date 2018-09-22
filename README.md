@@ -1,9 +1,13 @@
 # SmartCar
 This repository is created for smart car challange.
 
+Cloud Endpoint<br/>
+The application is currently deployed on aws server on the given location.
+
+http://smartcar.us-east-1.elasticbeanstalk.com  <br/><br/>
 
 
-System Setup<br/>
+Local System Setup<br/>
 * Clone git repo
 `git clone https://github.com/saurav-s/SmartCar.git`
 
