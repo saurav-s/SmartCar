@@ -44,8 +44,8 @@ Local System Setup<br/>
 
 Accessing EndPoints:
 To access the end points of the api use the application base url + /vehicles/... format 
-Ex: http://localhost:8080/vehicles/1234
-    http://smartcar.us-east-1.elasticbeanstalk.com/vehicles/1235/battery
+Ex: http://localhost:8080/vehicles/1234  <br/>
+    http://smartcar.us-east-1.elasticbeanstalk.com/vehicles/1235/battery . <br/>
 
 Use Rest Clients like postman etc to access the api's.
 
