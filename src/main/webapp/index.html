@@ -1,4 +1,242 @@
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+</head>
 
-<body>Hello World</body>
+<body>
+	<div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-info justify-content-between">
+			
+			<div>
+				<img class="auth0-lock-header-logo"
+					src="https://cdn.smartcar.com/assets/auth0/logo.svg">
+			</div>
+			<div>
+			
+			<a class="navbar-brand text-black"> Coding Challenge solution by Sanket Saurav</a>
+			</div>
+		</nav>
+
+	</div>
+	
+  
+  <div class="container">
+  	<br>
+  	<br>
+  	<form>
+  	<div class="jumbotron">
+    <h1>Smartcar Backend Coding Challenge</h1>
+<p>The Generic Motors (GM) car company has a terrible API. It returns badly
+structured JSON which isn&#39;t always consistent. Smartcar needs to adapt the API
+into a cleaner format.</p>
+<h2>Instructions</h2>
+<p>There are two API specifications provided below, the GM API and the Smartcar API
+Spec. Your task is to implement the Smartcar spec by making HTTP requests to the
+GM API.</p>
+<p>The flow looks like this:</p>
+<pre><code><span>client</span> <span>-</span><span>-</span><span>request</span><span>-</span><span>-</span>&gt; <span>Smartcar</span> <span>API</span> <span>-</span><span>-</span><span>request</span><span>-</span><span>-</span>&gt; <span>GM</span> <span>API</span>
+</code></pre><p>The GM API server is running at <strong><a href="http://gmapi.azurewebsites.net" target="_blank">gmapi.azurewebsites.net</a></strong>. The documentation
+below provides more details on the exact request/responses. Here is an example:</p>
+<pre><code>$ curl http:<span>//<a href="http://gmapi.azurewebsites.net/getVehicleInfoService" target="_blank">gmapi.azurewebsites.<wbr>net/getVehicleInfoService</a> \</span>
+       -X <span>POST</span> \
+       -<span>H</span> &#39;Content-<span>Type</span>: application/json&#39; \
+       -<span>d</span> &#39;{<span>&quot;id&quot;</span>: <span>&quot;1234&quot;</span>, <span>&quot;responseType&quot;</span>: <span>&quot;JSON&quot;</span>}&#39;
+</code></pre>
+<p>Your tasks are as follows:</p>
+<ul>
+<li>Implement the Smartcar API specification using any frameworks or libraries as necessary</li>
+<li>Provide tests for your API implementation</li>
+<li>Write your code to be well structured and documented</li>
+</ul>
+<h2>The GM API</h2>
+<p>Available IDs: <strong>1234</strong>, <strong>1235</strong></p>
+<h3>Vehicle Info</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>POST</span> /getVehicleInfoService
+Content-<span>Type</span>: application/json
+
+{
+  <span>&quot;id&quot;</span>: <span>&quot;1234&quot;</span>,
+  <span>&quot;responseType&quot;</span>: <span>&quot;JSON&quot;</span>
+}
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>service</span>&quot;: <span><span>&quot;getVehicleInfo&quot;</span></span>,
+  &quot;<span>status</span>&quot;: <span><span>&quot;200&quot;</span></span>,
+  &quot;<span>data</span>&quot;: <span>{
+    &quot;<span>vin</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;String&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;123123412412&quot;</span>
+    </span>}</span>,
+    &quot;<span>color</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;String&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;Metallic Silver&quot;</span>
+    </span>}</span>,
+    &quot;<span>fourDoorSedan</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;Boolean&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;True&quot;</span>
+    </span>}</span>,
+    &quot;<span>twoDoorCoupe</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;Boolean&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;False&quot;</span>
+    </span>}</span>,
+    &quot;<span>driveTrain</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;String&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;v8&quot;</span>
+    </span>}
+  </span>}
+</span>}
+</code></pre><h3>Security</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>POST</span> /getSecurityStatusService
+Content-<span>Type</span>: application/json
+
+{
+  <span>&quot;id&quot;</span>: <span>&quot;1234&quot;</span>,
+  <span>&quot;responseType&quot;</span>: <span>&quot;JSON&quot;</span>
+}
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>service</span>&quot;: <span><span>&quot;getSecurityStatus&quot;</span></span>,
+  &quot;<span>status</span>&quot;: <span><span>&quot;200&quot;</span></span>,
+  &quot;<span>data</span>&quot;: <span>{
+    &quot;<span>doors</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;Array&quot;</span></span>,
+      &quot;<span>values</span>&quot;: <span>[
+        {
+          &quot;<span>location</span>&quot;: <span>{
+            &quot;<span>type</span>&quot;: <span><span>&quot;String&quot;</span></span>,
+            &quot;<span>value</span>&quot;: <span><span>&quot;frontLeft&quot;</span>
+          </span>}</span>,
+          &quot;<span>locked</span>&quot;: <span>{
+            &quot;<span>type</span>&quot;: <span><span>&quot;Boolean&quot;</span></span>,
+            &quot;<span>value</span>&quot;: <span><span>&quot;False&quot;</span>
+          </span>}
+        </span>},
+        {
+          &quot;<span>location</span>&quot;: <span>{
+            &quot;<span>type</span>&quot;: <span><span>&quot;String&quot;</span></span>,
+            &quot;<span>value</span>&quot;: <span><span>&quot;frontRight&quot;</span>
+          </span>}</span>,
+          &quot;<span>locked</span>&quot;: <span>{
+            &quot;<span>type</span>&quot;: <span><span>&quot;Boolean&quot;</span></span>,
+            &quot;<span>value</span>&quot;: <span><span>&quot;True&quot;</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+  </span>}
+</span>}
+</code></pre><h3>Fuel/Battery Level</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>POST</span> /getEnergyService
+Content-<span>Type</span>: application/json
+
+{
+  <span>&quot;id&quot;</span>: <span>&quot;1234&quot;</span>,
+  <span>&quot;responseType&quot;</span>: <span>&quot;JSON&quot;</span>
+}
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>service</span>&quot;: <span><span>&quot;getEnergyService&quot;</span></span>,
+  &quot;<span>status</span>&quot;: <span><span>&quot;200&quot;</span></span>,
+  &quot;<span>data</span>&quot;: <span>{
+    &quot;<span>tankLevel</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;Number&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;30&quot;</span>
+    </span>}</span>,
+    &quot;<span>batteryLevel</span>&quot;: <span>{
+      &quot;<span>type</span>&quot;: <span><span>&quot;Null&quot;</span></span>,
+      &quot;<span>value</span>&quot;: <span><span>&quot;null&quot;</span>
+    </span>}
+  </span>}
+</span>}
+</code></pre><h3>Start/Stop Engine</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>POST</span> /actionEngineService
+Content-<span>Type</span>: application/json
+
+{
+  <span>&quot;id&quot;</span>: <span>&quot;1234&quot;</span>,
+  <span>&quot;command&quot;</span>: <span>&quot;START_VEHICLE|STOP_VEHICLE&quot;</span>,
+  <span>&quot;responseType&quot;</span>: <span>&quot;JSON&quot;</span>
+}
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>service</span>&quot;: <span><span>&quot;actionEngine&quot;</span></span>,
+  &quot;<span>status</span>&quot;: <span><span>&quot;200&quot;</span></span>,
+  &quot;<span>actionResult</span>&quot;: <span>{
+    &quot;<span>status</span>&quot;: <span><span>&quot;EXECUTED|FAILED&quot;</span>
+  </span>}
+</span>}
+</code></pre><h2>The Smartcar API Spec</h2>
+<h3>Vehicle Info</h3>
+<p><strong>Request:</strong></p>
+<pre><code>GET /vehicles/:<span>id</span>
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>vin</span>&quot;: <span><span>&quot;1213231&quot;</span></span>,
+  &quot;<span>color</span>&quot;: <span><span>&quot;Metallic Silver&quot;</span></span>,
+  &quot;<span>doorCount</span>&quot;: <span><span>4</span></span>,
+  &quot;<span>driveTrain</span>&quot;: <span><span>&quot;v8&quot;</span>
+</span>}
+</code></pre><h3>Security</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>GET </span>/vehicles/<span>:id/doors</span>
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>[
+  {
+    &quot;<span>location</span>&quot;: <span><span>&quot;frontLeft&quot;</span></span>,
+    &quot;<span>locked</span>&quot;: <span><span>true</span>
+  </span>},
+  {
+    &quot;<span>location</span>&quot;: <span><span>&quot;frontRight&quot;</span></span>,
+    &quot;<span>locked</span>&quot;: <span><span>true</span>
+  </span>}
+]
+</code></pre><h3>Fuel Range</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>GET </span>/vehicles/<span>:id/fuel</span>
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>percent</span>&quot;: <span><span>30</span>
+</span>}
+</code></pre><h3>Battery Range</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>GET </span>/vehicles/<span>:id/battery</span>
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>percent</span>&quot;: <span><span>50</span>
+</span>}
+</code></pre><h3>Start/Stop Engine</h3>
+<p><strong>Request:</strong></p>
+<pre><code><span>POST </span>/vehicles/<span>:id/engine</span>
+<span>Content-Type:</span> application/json
+
+{
+  <span>&quot;action&quot;</span><span>:</span> <span>&quot;START|STOP&quot;</span>
+}
+</code></pre><p><strong>Response:</strong></p>
+<pre><code>{
+  &quot;<span>status</span>&quot;: <span><span>&quot;success|error&quot;</span>
+</span>}
+</code></pre>
+  </div>
+  </form>
+</div>	
+	
+	
+
+
+</body>
 </html>
