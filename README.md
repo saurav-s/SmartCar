@@ -41,8 +41,8 @@ Local System Setup<br/>
 
       	`java -jar SmartCar-0.0.1-SNAPSHOT.war`<br/>
 
-
-Accessing EndPoints:
+<br/>
+Accessing EndPoints: <br/>
 To access the end points of the api use the application base url + /vehicles/... format 
 Ex: http://localhost:8080/vehicles/1234  <br/>
     http://smartcar.us-east-1.elasticbeanstalk.com/vehicles/1235/battery . <br/>
